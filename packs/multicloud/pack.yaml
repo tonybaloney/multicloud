@@ -1,0 +1,9 @@
+---
+name : multicloud
+description : st2 content pack containing multicloud actions
+keywords:
+  - cloud
+  - hybrid
+version : 0.1
+author : Anthony Shaw
+email : anthony.shaw@dimensiondata.com
