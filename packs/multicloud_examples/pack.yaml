@@ -1,0 +1,9 @@
+---
+name : multicloud_examples
+description : st2 content pack containing multicloud example workflows
+keywords:
+  - cloud
+  - hybrid
+version : 0.1
+author : Anthony Shaw
+email : anthony.shaw@dimensiondata.com
