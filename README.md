@@ -8,4 +8,4 @@ The ability to orchestrate against multiple clouds, public, private, hybrid.
 How do I use this pack?
 -----
 
-st2 run packs.install packs=multicloud_examples repo_url=https://github.com/tonybaloney/multicloud subtree=1
+st2 run packs.install packs=multicloud_examples repo_url=https://github.com/tonybaloney/multicloud subtree=true
