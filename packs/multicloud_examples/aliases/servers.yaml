@@ -9,9 +9,9 @@ ack:
   format: "Let me search across your clouds for those servers"
 result:
   format: |
-    {% if execution.result.result|length %}
+    {% if execution.result.result.servers|length %}
     found some servers for you: {~}
-    {% for server in execution.result.result %}
+    {% for server in execution.result.result.servers %}
     {{ loop.index }}. *{{ server.name }}*: {{ server.private_ips }}
     {% endfor %}
     {% else %}

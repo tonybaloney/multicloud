@@ -4,3 +4,16 @@ description: "List my clouds"
 action_ref: "multicloud.list_clouds"
 formats:
   - "clouds {{type}}"
+ack:
+  append_url: false
+  format: "Checking which clouds you have configured"
+result:
+  format: |
+    {% if execution.result.result.clouds|length %}
+    found some clouds for you: {~}
+    {% for cloud in execution.result.result.clouds %}
+    {{ loop.index }}. *{{ cloud.provider }}*: {{ cloud.region }}
+    {% endfor %}
+    {% else %}
+    couldn't find anything, sorry!
+    {% endif %}
