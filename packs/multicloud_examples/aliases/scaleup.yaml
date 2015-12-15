@@ -9,9 +9,4 @@ ack:
   format: "Provisioning new servers to your cluster"
 result:
   format: |
-    found some servers for you: {~}
-    {% for collection in execution.result.servers %}
-    {% for server in collection %}
-    {{ loop.index }}. *{{ server.name }}*: {{ server.private_ips }}
-    {% endfor %}
-    {% endfor %}
+    provisioned some new servers for you. Hope your website gets faster.

@@ -12,8 +12,8 @@ parameters:
     default: 'none'
     description: Zone to add the records too
     type: string
-  balancer:
-    type: object
+  balancer_id:
+    type: string
     required: false
     default: 'none'
     description: The load balancer to put this into
