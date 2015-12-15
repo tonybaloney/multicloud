@@ -16,8 +16,8 @@ multicloud_examples.example_parallel_scale_event:
       action: libcloud.create_vm
       with-items: i in <% list(range(0, $.number)) %>
       on-success:
-        - create_a_record: <% $.zone not false %>
-        - add_to_lb_node: <% $.balancer not false %>
+        - create_a_record: <% $.zone not 'none' %>
+        - add_to_lb_node: <% $.balancer not 'none' %>
       input:
         credentials: <% $.cloud %>
         name: <% $.name %>
@@ -33,7 +33,7 @@ multicloud_examples.example_parallel_scale_event:
         data: <% $.node.public_ips[0] %>
         name: <% $.node.name %>
       on-success:
-        - add_to_lb_node: <% $.balancer not false %>
+        - add_to_lb_node: <% $.balancer not 'none' %>
     add_to_lb_node:
       # [105, 230]
       action: libcloud.balancer_attach_member

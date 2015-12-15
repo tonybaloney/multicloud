@@ -9,13 +9,13 @@ parameters:
     type: string
     description: the cloud to scale up
   zone:
-    default: false
+    default: 'none'
     description: Zone to add the records too
     type: string
   balancer:
     type: object
     required: false
-    default: false
+    default: 'none'
     description: The load balancer to put this into
   image:
     type: string
