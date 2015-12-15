@@ -1,6 +1,6 @@
 Multi-cloud examples for StackStorm and talk on Multi-cloud
 =====
-
+![multi-cloud](http://www.cathyfamily.com/media/48831/peanuts.png)
 What is multi-cloud?
 ----
 The ability to orchestrate against multiple clouds, public, private, hybrid.

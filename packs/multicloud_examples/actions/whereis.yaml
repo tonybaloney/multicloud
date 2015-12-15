@@ -5,6 +5,6 @@ description: Which Cloud did I leave my VM in?
 enabled: true
 entry_point: workflows/whereis.yaml
 parameters:
-  name:
+  search:
     type: string
     required: true

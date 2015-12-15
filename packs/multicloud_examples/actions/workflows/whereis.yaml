@@ -4,7 +4,7 @@ version: '2.0'
 multicloud_examples.whereis:
     type: direct
     input:
-        - name
+        - search
     output:
         servers: <% $.servers %>
     tasks:
@@ -22,6 +22,6 @@ multicloud_examples.whereis:
           with-items: item in <% $.clouds %>
           action: libcloud.list_vms
           input:
-            credentials: <% $.item.key() %>
+            credentials: <% $.item %>
           publish:
-            servers: <% task(list_vms).result.result %>
+            servers: <% task(list_vms).result.result.where($.name = $.search or $.private_ips.contains($.query) or $.public_ips.contains($.query)).select($.name) %>
