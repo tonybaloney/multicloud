@@ -1,9 +1,9 @@
 ---
 name: "servers"
 description: "List servers"
-action_ref: "multicloud_examples.whereis"
+action_ref: "libcloud.list_vms"
 formats:
-  - "servers {{query}}"
+  - "servers {{credentials}}"
 ack:
   append_url: false
   format: "Let me search across your clouds for those servers"
