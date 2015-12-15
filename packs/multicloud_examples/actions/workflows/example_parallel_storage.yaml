@@ -1,0 +1,27 @@
+---
+version: '2.0'
+
+multicloud_examples.example_parallel_storage:
+  input:
+    - container
+    - image
+    - name
+    - size
+  tasks:
+    create_node_1:
+      # [365, 26]
+      action: libcloud.create_vm
+      on-success:
+        - create_a_record
+      input:
+        credentials: 'openstack'
+        name: <% $.name %>
+        size_name: <% $.size %>
+        image_name: <% $.image %>
+      publish:
+        node1: <% $.create_node_1.result %>
+    add_file_to_container:
+      input:
+        credentials: 's3'
+        container_name: <% $.container %>
+        file_path: '/tmp/myupload_image'
