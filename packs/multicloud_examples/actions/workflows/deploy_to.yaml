@@ -15,8 +15,8 @@ multicloud_examples.deploy_to:
           # [105, 26]
           action: libcloud.create_vm
           input:
-            credentials: <% $.cloud $>
+            credentials: <% $.cloud %>
             name: <% $.name %>
-            size_id: <% $.size %>
+            size_name: <% $.size %>
             image_name: <% $.image %>
 

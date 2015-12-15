@@ -3,4 +3,4 @@ name: "deploy_to"
 description: "Deploy a server"
 action_ref: "multicloud_examples.deploy_to"
 formats:
-  - "deploy_to {{cloud}} {{image}} {{size}} {{name}}"
+  - "deploy_to {{cloud}} {{name}} {{image}} {{size}}"
