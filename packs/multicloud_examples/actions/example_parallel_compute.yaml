@@ -5,8 +5,8 @@ description: Deploy compute nodes in parallel
 enabled: true
 entry_point: workflows/example_parallel_compute.yaml
 parameters:
-  balancer:
-    type: object
+  balancer_id:
+    type: string
     required: false
     description: The load balancer to put this into
   image:
@@ -18,3 +18,12 @@ parameters:
   size:
     type: string
     description: The size name
+  domain:
+    type: string
+    description: The domain to add the records to
+  cloud:
+    type: string
+    description: The name of the cloud to use
+  dns_cloud:
+    type: string
+    description: The name of the DNS cloud to use
