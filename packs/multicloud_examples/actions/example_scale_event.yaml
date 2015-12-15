@@ -5,19 +5,30 @@ description: Deploy compute node because of a scale event
 enabled: true
 entry_point: workflows/example_parallel_scale_event.yaml
 parameters:
-  search:
+  cloud:
     type: string
-    required: true
+    description: the cloud to scale up
+  zone:
+    default: false
+    description: Zone to add the records too
+    type: string
   balancer:
     type: object
     required: false
+    default: false
     description: The load balancer to put this into
   image:
     type: string
+    default: 'RedHat 6 64-bit 4 CPU'
     description: The name of the image to deploy
   name:
     type: string
+    default: 'my-web-farm'
     description: The name of the server (+1,2)
   size:
     type: string
+    default: 'default'
     description: The size name
+  number:
+    type: int
+    description: The number to scale up by

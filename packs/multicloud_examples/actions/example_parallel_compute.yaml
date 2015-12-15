@@ -5,9 +5,6 @@ description: Deploy compute nodes in parallel
 enabled: true
 entry_point: workflows/example_parallel_compute.yaml
 parameters:
-  search:
-    type: string
-    required: true
   balancer:
     type: object
     required: false

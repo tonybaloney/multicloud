@@ -1,0 +1,17 @@
+---
+name: "scaleup"
+description: "Scale up your environment"
+action_ref: "multicloud_examples.example_scale_event"
+formats:
+  - "scaleup {{cloud}} {{number=1}}"
+ack:
+  append_url: false
+  format: "Provisioning new servers to your cluster"
+result:
+  format: |
+    found some servers for you: {~}
+    {% for collection in execution.result.servers %}
+    {% for server in collection %}
+    {{ loop.index }}. *{{ server.name }}*: {{ server.private_ips }}
+    {% endfor %}
+    {% endfor %}

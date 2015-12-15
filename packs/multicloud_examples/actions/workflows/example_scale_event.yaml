@@ -1,0 +1,50 @@
+---
+version: '2.0'
+
+multicloud_examples.example_parallel_scale_event:
+  input:
+    - cloud
+    - balancer
+    - zone
+    - image
+    - name
+    - size
+    - number
+  tasks:
+    create_node_1:
+      # [105, 26]
+      action: libcloud.create_vm
+      with-items: i in <% list(range(0, $.number)) %>
+      on-success:
+        - create_a_record: <% $.zone not false %>
+        - add_to_lb_node: <% $.balancer not false %>
+      input:
+        credentials: <% $.cloud %>
+        name: <% $.name %>
+        size_name: <% $.size %>
+        image_name: <% $.image %>
+      publish:
+        node: <% $.create_node.result %>
+    create_a_record:
+      # [105, 128]
+      action: libcloud.create_dns_record
+      input:
+        type: 'A'
+        data: <% $.node.public_ips[0] %>
+        name: <% $.node.name %>
+      on-success:
+        - add_to_lb_node: <% $.balancer not false %>
+    add_to_lb_node:
+      # [105, 230]
+      action: libcloud.balancer_attach_member
+      on-success:
+        - list_lb_members
+      input:
+        balancer_id: <% $.balancer.id %>
+        member_ip: <% $.node.private_ips[0] %>
+        member_port: 80
+    list_lb_members:
+      # [105, 332]
+      action: libcloud.balancer_list_members
+      input:
+        balancer_id: <% $.balancer.id %>
