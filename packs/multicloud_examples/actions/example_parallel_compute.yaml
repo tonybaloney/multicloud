@@ -1,0 +1,23 @@
+---
+name: example_parallel_compute
+runner_type: mistral-v2
+description: Deploy compute nodes in parallel
+enabled: true
+entry_point: workflows/example_parallel_compute.yaml
+parameters:
+  search:
+    type: string
+    required: true
+  balancer:
+    type: object
+    required: false
+    description: The load balancer to put this into
+  image:
+    type: string
+    description: The name of the image to deploy
+  name:
+    type: string
+    description: The name of the server (+1,2)
+  size:
+    type: string
+    description: The size name
