@@ -1,0 +1,22 @@
+---
+version: '2.0'
+
+multicloud_examples.deploy_to:
+    type: direct
+    input:
+        - cloud
+        - name
+        - size
+        - image
+    output:
+        servers: <% $.servers %>
+    tasks:
+        create_vm:
+          # [105, 26]
+          action: libcloud.create_vm
+          input:
+            credentials: <% $.cloud $>
+            name: <% $.name %>
+            size_id: <% $.size %>
+            image_name: <% $.image %>
+
