@@ -7,6 +7,7 @@ formats:
 ack:
   append_url: false
   format: "OK! Let me go out and provision that server for you, it'll take a minute or 10."
-format: |
+result:
+  format: |
     Created your new server: {~}
-    {{ execution.result.result.server.name }}*: {{ execution.result.result.server.private_ips }}
+    {{ execution.result.server.name }}*: {{ execution.result.server.private_ips }}
