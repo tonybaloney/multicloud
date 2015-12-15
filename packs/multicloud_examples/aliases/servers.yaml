@@ -3,4 +3,4 @@ name: "servers"
 description: "List servers"
 action_ref: "multicloud_examples.whereis"
 formats:
-  - "servers"
+  - "servers {{search}}"
