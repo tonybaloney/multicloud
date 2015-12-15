@@ -29,6 +29,7 @@ multicloud_examples.example_scale_event:
       # [105, 128]
       action: libcloud.create_dns_record
       input:
+        credentials: <% $.cloud %>
         type: 'A'
         data: <% $.node.public_ips[0] %>
         name: <% $.node.name %>
@@ -40,6 +41,7 @@ multicloud_examples.example_scale_event:
       on-success:
         - list_lb_members
       input:
+        credentials: <% $.cloud %>
         balancer_id: <% $.balancer_id %>
         member_ip: <% $.node.private_ips[0] %>
         member_port: 80
@@ -47,4 +49,5 @@ multicloud_examples.example_scale_event:
       # [105, 332]
       action: libcloud.balancer_list_members
       input:
+        credentials: <% $.cloud %>
         balancer_id: <% $.balancer.id %>
