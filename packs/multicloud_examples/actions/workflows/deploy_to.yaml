@@ -9,7 +9,7 @@ multicloud_examples.deploy_to:
         - size
         - image
     output:
-        servers: <% $.servers %>
+        server: <% $.server %>
     tasks:
         create_vm:
           # [105, 26]
@@ -19,4 +19,5 @@ multicloud_examples.deploy_to:
             name: <% $.name %>
             size_name: <% $.size %>
             image_name: <% $.image %>
-
+          publish:
+            server: <% $.create_vm.result %>
