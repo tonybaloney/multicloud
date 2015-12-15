@@ -3,7 +3,7 @@ name: "scaleup"
 description: "Scale up your environment"
 action_ref: "multicloud_examples.example_scale_event"
 formats:
-  - "scaleup {{cloud}} {{number=1}}"
+  - "scaleup {{cloud}} {{domain}} {{number=1}}"
 ack:
   append_url: false
   format: "Provisioning new servers to your cluster"

@@ -10,6 +10,7 @@ multicloud_examples.example_scale_event:
     - name
     - size
     - number
+    - domain
   tasks:
     create_node_1:
       # [105, 26]
@@ -33,6 +34,7 @@ multicloud_examples.example_scale_event:
         type: 'A'
         data: <% $.node.public_ips[0] %>
         name: <% $.node.name %>
+        domain: <% $.domain %>
       on-success:
         - add_to_lb_node: <% $.balancer_id not 'none' %>
     add_to_lb_node:

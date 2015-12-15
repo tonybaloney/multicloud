@@ -32,3 +32,6 @@ parameters:
   number:
     type: integer
     description: The number to scale up by
+  domain:
+    type: string
+    required: true
