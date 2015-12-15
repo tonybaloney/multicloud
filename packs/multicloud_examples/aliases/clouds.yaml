@@ -1,0 +1,6 @@
+---
+name: "clouds"
+description: "List my clouds"
+action_ref: "multicloud.list_clouds"
+formats:
+  - "clouds {{type}}"

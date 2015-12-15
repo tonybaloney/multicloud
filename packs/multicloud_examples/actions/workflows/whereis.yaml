@@ -24,4 +24,5 @@ multicloud_examples.whereis:
           input:
             credentials: <% $.item %>
           publish:
-            servers: <% task(list_vms).result.result.where($.name = $.search or $.private_ips.contains($.query) or $.public_ips.contains($.query)).select($.name) %>
+            servers: <% $.list_vms.result %>
+
