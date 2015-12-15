@@ -5,94 +5,23 @@ multicloud_examples.whereis:
     type: direct
     input:
         - name
+    output:
+        servers: <% $.servers %>
     tasks:
-      get_location:
-        # [453, 75]
-        action: dimensiondata.get_location_by_id
-        input:
-          region: <% $.location %>
-          id: <% $.datacenter %>
-        on-success:
-          - create_network_domain
-        on-error:
-          - warning_error
-      create_network_domain:
-        action: dimensiondata.create_network_domain
-        input:
-          region: <% $.location %>
-          location: <% $.datacenter %>
-          name: <% $.network_domain_name %>
-          service_plan: "ADVANCED"
-        publish:
-          network_domain_id: <% $.create_network_domain.result.id %>
-        on-success:
-          - create_vlan
-        on-error:
-          - warning_error
-      create_vlan:
-         action: dimensiondata.create_vlan
-         input:
-            region: <% $.location %>
-            name: <% $.vlan_name %>
-            network_domain_id: <% $.network_domain_id %>
-            private_ipv4_base_address: <% $.vlan_range %>
-         publish:
-            vlan_id: <% $.create_vlan.result.id %>
-         on-success:
-            - deploy_web_server
-            - deploy_web_server2
-         on-error:
-          - warning_error
-      deploy_web_server:
-        # [319, 217]
-        action: dimensiondata.create_vm_mcp2
-        input:
-          region: <% $.location %>
-          location: <% $.datacenter %>
-          password: "PassWord!!"
-          image_name: <% $.image_name %>
-          network_domain_id: <% $.network_domain_id %>
-          vlan_id: <% $.vlan_id %>
-          name: "Web 1"
-          description: "Web Server 1"
-          is_started: true
-        publish:
-          vm_id: <% $.deploy_web_server.result.id %>
-          vm_ip: <% $.deploy_web_server.result.private_ips[0] %>
-        on-error:
-          - warning_error
-        on-success:
-          - Complete
-      deploy_web_server2:
-        # [555, 219]
-        action: dimensiondata.create_vm_mcp2
-        input:
-          region: <% $.location %>
-          location: <% $.datacenter %>
-          password: "PassWord!!"
-          image_name: <% $.image_name %>
-          network_domain_id: <% $.network_domain_id %>
-          vlan_id: <% $.vlan_id %>
-          name: "Web 2"
-          description: "Web Server 2"
-          is_started: true
-        publish:
-          vm2_id: <% $.deploy_web_server2.result.id %>
-          vm2_ip: <% $.deploy_web_server2.result.private_ips[0] %>
-        on-error:
-          - warning_error
-        on-success:
-          - Complete    
-      warning_error:
-        # [34, 437]
-        action: slack.post_message
-        input:
-          message: "There was an error in deployment"
-        on-complete:
-          - fail
-      Complete:
-        # [355, 867]
-        join: all
-        action: slack.post_message
-        input: 
-          message: "done!"
+        list_clouds:
+          # [213, 89]
+          action: multicloud.list_clouds
+          input:
+            type: "compute"
+          publish:
+            clouds: <% task(list_clouds).result.result.keys() %> 
+          on-success:
+                - list_vms
+        list_vms:
+          # [214, 308]
+          with-items: item in <% $.clouds %>
+          action: libcloud.list_vms
+          input:
+            credentials: <% $.item.key() %>
+          publish:
+            servers: <% task(list_vms).result.result %>
