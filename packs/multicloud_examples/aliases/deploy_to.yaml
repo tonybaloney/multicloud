@@ -10,4 +10,4 @@ ack:
 result:
   format: |
     Created your new server: {~}
-    {{ execution.result.server.name }}*: {{ execution.result.server.private_ips }}
+    *{{ execution.result.server.name }}*: with IPs {{ execution.result.server.private_ips }} and public {{ execution.result.server.public_ips }}
