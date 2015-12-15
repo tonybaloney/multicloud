@@ -1,9 +1,9 @@
 ---
-name: example_parallel_scale_event
+name: example_scale_event
 runner_type: mistral-v2
 description: Deploy compute node because of a scale event
 enabled: true
-entry_point: workflows/example_parallel_scale_event.yaml
+entry_point: workflows/example_scale_event.yaml
 parameters:
   cloud:
     type: string
