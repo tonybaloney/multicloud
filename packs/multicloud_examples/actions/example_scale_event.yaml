@@ -30,5 +30,5 @@ parameters:
     default: 'default'
     description: The size name
   number:
-    type: int
+    type: integer
     description: The number to scale up by
